@@ -1,0 +1,24 @@
+<script src="WebRtcShitBlt.js"></script>
+
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    var sb = null;
+
+    function init(){
+        sb = new WebRtcSB('uniqueName');
+
+        sb.sbStartCapture().then((stream)=>{
+            document.getElementById('myVideo').srcObject = stream;
+        });
+    }
+</script>
+<head>
+</head>
+<body onload="init();">
+<h1>WebRtcShitBlt sample app</h1>
+<div>
+    <video id="myVideo" autoplay style="width: 640px;height: 480px;border-style: solid"></video>
+</div>
+</body>
+</html>
