@@ -1,15 +1,23 @@
 class WebRtcSB
 {
-    constructor(constraints = {video: true, audio: true},
-                uniqueName = 'sbUniqueName',
-                imagePath = 'sb.png')
+    constructor(imagePath = 'sb.png',
+                imagePosX = 10,
+                imagePosY = 10,
+                imageWidth = 50,
+                imageHeight = 50,
+                constraints = {video: true, audio: true})
     {
         this._constraints = constraints;
-        this._uniqueNamme = uniqueName;
         this._createHiddenVideoElemment();
         this._createHiddenCanvas();
         this._myImage = new Image();
         this._myImage.src = imagePath;
+        this._imagePos = {
+            X: imagePosX,
+            Y: imagePosY,
+            W: imageWidth,
+            H: imageHeight
+        }
     }
 
     // returns a promise resolving to a MediaStream
@@ -31,7 +39,6 @@ class WebRtcSB
     {
         this._hiddenVideoElement = document.createElement('video');
         this._hiddenVideoElement.style.display = 'none';
-        this._hiddenVideoElement.setAttribute('id', this._uniqueNamme+'_SBSrc');
         this._hiddenVideoElement.setAttribute("autoplay", 'true');
         this._hiddenVideoElement.setAttribute("width", '640px');
         this._hiddenVideoElement.setAttribute("height", '480px');
@@ -42,7 +49,6 @@ class WebRtcSB
     {
         this._hiddenCanvasElement = document.createElement('canvas');
         this._hiddenCanvasElement.style.display = 'none';
-        this._hiddenCanvasElement.setAttribute('id', this._uniqueNamme+'_SBCanvas');
         this._hiddenCanvasElement.setAttribute("width", '640px');
         this._hiddenCanvasElement.setAttribute("height", '480px');
         document.body.appendChild(this._hiddenCanvasElement);
@@ -51,7 +57,11 @@ class WebRtcSB
     _sendImageToCanvas()
     {
         this._sbVidContext.drawImage(this._hiddenVideoElement, 0, 0, this._hiddenVideoElement.width, this._hiddenVideoElement.height);
-        this._sbVidContext.drawImage(this._myImage, 0, 0, 50, 50);
+        this._sbVidContext.drawImage(this._myImage,
+            this._imagePos.X,
+            this._imagePos.Y,
+            this._imagePos.W,
+            this._imagePos.H);
         requestAnimationFrame(this._sendImageToCanvas.bind(this));
     }
 }
