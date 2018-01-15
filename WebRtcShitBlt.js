@@ -8,8 +8,7 @@ class WebRtcSB
                 constraints = {video: true, audio: true})
     {
         this._constraints = constraints;
-        this._createHiddenVideoElemment();
-        this._createHiddenCanvas();
+        this._createHiddenVideoElement();
         this._myImage = new Image();
         this._myImage.src = imagePath;
         this._imagePos = {
@@ -29,19 +28,20 @@ class WebRtcSB
             })
             .then((stream) => {
                 this._hiddenVideoElement.srcObject = stream;
-                this._sbVidContext = this._hiddenCanvasElement.getContext("2d"); // need to deal with this if we want to be able to run 2 instances
+                return Promise.resolve();
+            })
+            .then(() => {
+                this._createHiddenCanvas();
                 requestAnimationFrame(this._sendImageToCanvas.bind(this));
-                return Promise.resolve(this._hiddenCanvasElement.captureStream());
+                return this._hiddenCanvasElement.captureStream();
             })
     }
 
-    _createHiddenVideoElemment()
+    _createHiddenVideoElement()
     {
         this._hiddenVideoElement = document.createElement('video');
         this._hiddenVideoElement.style.display = 'none';
         this._hiddenVideoElement.setAttribute("autoplay", 'true');
-        this._hiddenVideoElement.setAttribute("width", '640px');
-        this._hiddenVideoElement.setAttribute("height", '480px');
         document.body.appendChild(this._hiddenVideoElement);
     }
 
@@ -49,19 +49,27 @@ class WebRtcSB
     {
         this._hiddenCanvasElement = document.createElement('canvas');
         this._hiddenCanvasElement.style.display = 'none';
-        this._hiddenCanvasElement.setAttribute("width", '640px');
-        this._hiddenCanvasElement.setAttribute("height", '480px');
+        this._hiddenCanvasElement.setAttribute("width", '0');
+        this._hiddenCanvasElement.setAttribute("height", '0');
         document.body.appendChild(this._hiddenCanvasElement);
+        this._sbVidContext = this._hiddenCanvasElement.getContext("2d");
     }
     
     _sendImageToCanvas()
     {
-        this._sbVidContext.drawImage(this._hiddenVideoElement, 0, 0, this._hiddenVideoElement.width, this._hiddenVideoElement.height);
-        this._sbVidContext.drawImage(this._myImage,
-            this._imagePos.X,
-            this._imagePos.Y,
-            this._imagePos.W,
-            this._imagePos.H);
+        if (this._hiddenCanvasElement.width === 0 && this._hiddenVideoElement.videoWidth !== 0){
+            this._hiddenCanvasElement.setAttribute("width", this._hiddenVideoElement.videoWidth);
+            this._hiddenCanvasElement.setAttribute("height", this._hiddenVideoElement.videoHeight);
+        }
+
+        if (this._hiddenCanvasElement.width !== 0) {
+            this._sbVidContext.drawImage(this._hiddenVideoElement, 0, 0, this._hiddenVideoElement.videoWidth, this._hiddenVideoElement.videoHeight);
+            this._sbVidContext.drawImage(this._myImage,
+                this._imagePos.X,
+                this._imagePos.Y,
+                this._imagePos.W,
+                this._imagePos.H);
+        }
         requestAnimationFrame(this._sendImageToCanvas.bind(this));
     }
 }
