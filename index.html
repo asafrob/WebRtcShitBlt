@@ -6,7 +6,7 @@
     var sb = null;
 
     function init(){
-        sb = new WebRtcSB('uniqueName');
+        sb = new WebRtcSB();
 
         sb.sbStartCapture().then((stream)=>{
             document.getElementById('myVideo').srcObject = stream;
