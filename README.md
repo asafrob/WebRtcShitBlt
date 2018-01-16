@@ -1,6 +1,6 @@
 # WebRtcShitBlt
 
-this library is based on ES6, so if u use a web browser that does not support it something like Bubble is required
+this library is based on ES6
 
 ![alt text](preview.png "sample screen of using the lib with default image")
 
