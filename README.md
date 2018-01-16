@@ -1,13 +1,13 @@
 # WebRtcShitBlt
 
-image show a smaple use of a video captured by WebRTC with an embeded image (brown/yellow) on the top left corner
+image show a smaple use of a video captured by WebRTC with an embeded image (brown/yellow) on the top left corner<br/>
 ![alt text](preview.png "sample screen of using the lib with default image")
 
-###what does it do ?
+### what does it do ?
 This library wraps a WebRTC source and returns a MediaStream that can be used as a normal MediaStream u get from navigator.mediaDevices.getUserMedia.<br/>
 The returned MediaStream will have your selected image embeded in the video stream.
 
-###common usecases
+### common usecases
 * logo
 * watermark
 * image extracted from a presentation
@@ -35,11 +35,11 @@ sb.sbStartCapture()
 ### Note
 * this library is based on ES6
 
-###Tested on
+### Tested on
 * chrome 63 (OS X)
 * FireFox 57 (OS X)
 
-###Roadmap
+### Roadmap
 * change code structure so the processing the image undertakes will be done as a plugin
 * implement gray scale image plugin
 * make this available as an NPM too
