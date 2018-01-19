@@ -3,10 +3,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <script>
-    var sb = null;
 
     function init(){
-        sb = new WebRtcSB('sb.png', 10, 10, 50, 50);
+        var sb = new WebRtcSB({video:{width:640, height:480}, audio: false});
+        var imgCopy = new ImageCopy();
+        var imgAdd = new ImageAdd('sb.png', 10, 10, 50, 50);
+        var imgAdd2 = new ImageAdd('sb.png', 580, 10, 50, 50);
+        var imgAdd3 = new ImageAdd('sb.png', 10, 420, 50, 50);
+        var imgAdd4 = new ImageAdd('sb.png', 580, 420, 50, 50);
+        sb.setManipulators([imgCopy, imgAdd, imgAdd2, imgAdd3, imgAdd4]);
 
         sb.sbStartCapture()
             .then((stream)=>{

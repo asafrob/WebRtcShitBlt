@@ -23,15 +23,18 @@ Canvas MediaStream is returned to the calling app.
 
 ### Sample code
 ```javascript
-// create an instance of SB
-var sb = new WebRtcSB('sb.png', 10, 10, 50, 50);
+        // the constanint object defaults to {video: true, audio: true} but to save u the echo...
+        var sb = new WebRtcSB({video:{width:640, height:480}, audio: false});
+        // create manipulation objects. they will be processed in the order you supply them.
+        // in current live demo u will get 4 images
+        var imgCopy = new ImageCopy();
+        var imgAdd = new ImageAdd('sb.png', 10, 10, 50, 50);
+        sb.setManipulators([imgCopy, imgAdd]);
 
-// get a Promise resolving to a MediaSource
-sb.sbStartCapture()
-    .then((stream)=>{
-    // play MediaSource on a video element
-    document.getElementById('myVideo').srcObject = stream;
-})
+        sb.sbStartCapture()
+            .then((stream)=>{
+            document.getElementById('myVideo').srcObject = stream;
+        })
 ```
 
 ### Note
