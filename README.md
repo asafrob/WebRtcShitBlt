@@ -45,6 +45,4 @@ Canvas MediaStream is returned to the calling app.
 * FireFox 57 (OS X)
 
 ### Roadmap
-* change code structure so the processing the image undertakes will be done as a plugin
-* implement gray scale image plugin
-* make this available as an NPM too
+* implement more plugins
