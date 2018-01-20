@@ -1,6 +1,6 @@
 # WebRtcShitBlt
 
-### Live demo at https://asafrob.github.io/WebRtcShitBlt/
+#### Live demo at https://asafrob.github.io/WebRtcShitBlt/
 
 image show a smaple use of a video captured by WebRTC with an embeded image (brown/yellow) on the top left corner<br/>
 ![alt text](preview.png "sample screen of using the lib with default image")
@@ -39,6 +39,7 @@ Canvas MediaStream is returned to the calling app.
 
 ### Note
 * this library is based on ES6
+* npm at https://www.npmjs.com/package/webrtcshitblt
 
 ### Tested on
 * chrome 63 (OS X)
