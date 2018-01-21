@@ -1,5 +1,6 @@
 # WebRtcShitBlt
 
+[![npm](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/webrtcshitblt)
 #### Live demo at https://asafrob.github.io/WebRtcShitBlt/
 
 image show a smaple use of a video captured by WebRTC with an embeded image (brown/yellow) on the top left corner<br/>
@@ -39,11 +40,11 @@ Canvas MediaStream is returned to the calling app.
 
 ### Note
 * this library is based on ES6
-* npm at https://www.npmjs.com/package/webrtcshitblt
 
 ### Tested on
 * chrome 63 (OS X)
 * FireFox 57 (OS X)
 
 ### Roadmap
+* test & support other browsers/OSs
 * implement more plugins
