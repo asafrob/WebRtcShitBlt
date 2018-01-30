@@ -44,6 +44,7 @@ Canvas MediaStream is returned to the calling app.
 ### Tested on
 * chrome 63 (OS X)
 * FireFox 57 (OS X)
+* Safari 11.0.3 (OS X)
 
 ### Roadmap
 * test & support other browsers/OSs

@@ -70,8 +70,16 @@ class WebRtcSB
     _createHiddenVideoElement()
     {
         this._hiddenVideoElement = document.createElement('video');
-        this._hiddenVideoElement.style.display = 'none';
         this._hiddenVideoElement.setAttribute("autoplay", 'true');
+
+        // safari wont play the video if the element is not visible on screen, so instead of hidden, put a 1 pix
+        if (this._isSafari()) {
+            this._hiddenVideoElement.setAttribute("width", '1px');
+            this._hiddenVideoElement.setAttribute("height", '1px');
+        }
+        else{
+            this._hiddenVideoElement.style.display = 'none';
+        }
         document.body.appendChild(this._hiddenVideoElement);
     }
 
@@ -98,6 +106,17 @@ class WebRtcSB
             });
         }
         requestAnimationFrame(this._sendImageToCanvas.bind(this));
+    }
+
+    _isSafari()
+    {
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.indexOf('safari') != -1) {
+            if (ua.indexOf('chrome') == -1) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 
