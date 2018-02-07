@@ -49,3 +49,11 @@ Canvas MediaStream is returned to the calling app.
 ### Roadmap
 * test & support other browsers/OSs
 * implement more plugins
+
+### Versions history
+####1.0.0
+initial release
+####1.0.1
+workaround for safari -  instead of an hidden video element use a 1px*1px video element
+####1.0.2
+support iOS 11

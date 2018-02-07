@@ -71,6 +71,7 @@ class WebRtcSB
     {
         this._hiddenVideoElement = document.createElement('video');
         this._hiddenVideoElement.setAttribute("autoplay", 'true');
+        this._hiddenVideoElement.setAttribute("playsinline", true);
 
         // safari wont play the video if the element is not visible on screen, so instead of hidden, put a 1 pix
         if (this._isSafari()) {
