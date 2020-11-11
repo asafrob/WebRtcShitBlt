@@ -51,19 +51,23 @@ class WebRtcSB
 
     // returns a promise resolving to a MediaStream
     sbStartCapture()
-    {
+    {   let audio; //audio from stream
         return Promise.resolve()
             .then(()=>{
                 return navigator.mediaDevices.getUserMedia(this._constraints);
             })
             .then((stream) => {
                 this._hiddenVideoElement.srcObject = stream;
+                audio=stream.getAudioTracks()[0] //reference to audio track in the original stream
                 return Promise.resolve();
             })
             .then(() => {
                 this._createHiddenCanvas();
                 requestAnimationFrame(this._sendImageToCanvas.bind(this));
-                return this._hiddenCanvasElement.captureStream();
+                //return this._hiddenCanvasElement.captureStream();
+                let finalOutput=this._hiddenCanvasElement.captureStream()
+                finalOutput.addTrack(audio); //adding audio to canvas stream obj
+                return finalOutput //this final output has both, video with watermark and audio
             })
     }
 
